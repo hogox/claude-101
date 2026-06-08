@@ -3,4 +3,5 @@
 - **Pedir que "describa" en vez de que "haga".** Si quieres un Excel, pide el Excel.
 - **Confiar sin revisar.** La IA se equivoca con seguridad. En datos, cifras y temas legales/financieros: verifica siempre.
 - **Saltar directo a Cowork.** Sin base de prompts y proyectos, el modo agéntico solo amplifica el desorden.
+- **Aprobar a ciegas en Cowork.** No te saltes la revisión del plan ni le des acceso amplio: empieza con una carpeta dedicada de prueba.
 - **Pegar información sensible sin pensar.** Trata cada chat como un correo: no metas datos que no pondrías por escrito sin cuidado.

@@ -1,14 +1,17 @@
-// Each chapter's body is the exact text from the source guide (claude-101-guia.md),
-// imported as raw markdown and rendered with react-markdown.
+// Each chapter's body lives as raw markdown in ./chapters/*.md and is rendered
+// with react-markdown. Some chapters come from the source guide; Cowork and
+// Claude Code were authored from validated research (June 2026).
 import mentalidad from "./chapters/mentalidad.md?raw";
 import nivel1 from "./chapters/nivel-1-prompts.md?raw";
 import nivel2 from "./chapters/nivel-2-personalizar.md?raw";
 import nivel3 from "./chapters/nivel-3-proyectos.md?raw";
 import nivel4 from "./chapters/nivel-4-capacidades.md?raw";
-import nivel5 from "./chapters/nivel-5-skills.md?raw";
-import nivel6 from "./chapters/nivel-6-conectores.md?raw";
-import nivel7 from "./chapters/nivel-7-cowork.md?raw";
-import nivel8 from "./chapters/nivel-8-siguiente.md?raw";
+import skills from "./chapters/nivel-5-skills.md?raw";
+import conectores from "./chapters/nivel-6-conectores.md?raw";
+import coworkQueEs from "./chapters/cowork-que-es.md?raw";
+import coworkCasos from "./chapters/cowork-casos.md?raw";
+import coworkSeguridad from "./chapters/cowork-seguridad.md?raw";
+import claudeCode from "./chapters/claude-code.md?raw";
 import plan from "./chapters/plan-4-semanas.md?raw";
 import recursos from "./chapters/recursos.md?raw";
 import errores from "./chapters/errores.md?raw";
@@ -17,9 +20,9 @@ import paraLlevar from "./chapters/para-llevar.md?raw";
 export type Group =
   | "Comienza aquí"
   | "Semana 1 · Fundamentos"
-  | "Semana 2 · Proyectos y capacidades"
-  | "Semana 3 · Skills y conectores"
-  | "Semana 4 · Cowork"
+  | "Semana 2 · Proyectos y entregables"
+  | "Semana 3 · Cowork"
+  | "Semana 4 · Llevarlo más lejos"
   | "Ayudas y recursos";
 
 export interface Chapter {
@@ -33,7 +36,7 @@ export interface Chapter {
   title: string;
   /** one-line subtitle / hook shown under the title */
   subtitle: string;
-  /** exact markdown body from the guide */
+  /** chapter body as markdown */
   body: string;
   /** YouTube video ids embedded at the bottom of the chapter */
   videoIds: string[];
@@ -61,8 +64,8 @@ export const chapters: Chapter[] = [
   {
     slug: "nivel-1-prompts",
     group: "Semana 1 · Fundamentos",
-    label: "Nivel 1 — Prompts que rinden",
-    title: "Nivel 1 — Prompts que rinden",
+    label: "Prompts que rinden",
+    title: "Prompts que rinden",
     subtitle: "Los 5 ingredientes de un prompt profesional.",
     body: nivel1,
     videoIds: [],
@@ -70,65 +73,83 @@ export const chapters: Chapter[] = [
   {
     slug: "nivel-2-personalizar",
     group: "Semana 1 · Fundamentos",
-    label: "Nivel 2 — Personalizar Claude",
-    title: "Nivel 2 — Personalizar Claude",
+    label: "Personalizar Claude",
+    title: "Personalizar Claude",
     subtitle: "Preferencias y estilos: configúralo una vez.",
     body: nivel2,
     videoIds: [],
   },
   {
     slug: "nivel-3-proyectos",
-    group: "Semana 2 · Proyectos y capacidades",
-    label: "Nivel 3 — Proyectos",
-    title: "Nivel 3 — Proyectos (Projects)",
+    group: "Semana 2 · Proyectos y entregables",
+    label: "Proyectos",
+    title: "Proyectos (Projects)",
     subtitle: "Contexto persistente: cárgalo una vez, úsalo semanas.",
     body: nivel3,
     videoIds: ["SzKP4tM2_XA"],
   },
   {
     slug: "nivel-4-capacidades",
-    group: "Semana 2 · Proyectos y capacidades",
-    label: "Nivel 4 — Capacidades de trabajo",
-    title: "Nivel 4 — Las capacidades de trabajo (dentro del chat)",
+    group: "Semana 2 · Proyectos y entregables",
+    label: "Capacidades de trabajo",
+    title: "Las capacidades de trabajo (dentro del chat)",
     subtitle: "Archivos reales, análisis de datos, artefactos.",
     body: nivel4,
     videoIds: ["tdjMFxaZo-E"],
   },
   {
+    slug: "cowork-que-es",
+    group: "Semana 3 · Cowork",
+    label: "Cowork: qué es y cómo empezar",
+    title: "Cowork: qué es y cómo empezar",
+    subtitle: "En el chat Claude responde; en Cowork, Claude hace.",
+    body: coworkQueEs,
+    videoIds: ["8vwM96f4b5Q"],
+  },
+  {
+    slug: "cowork-casos",
+    group: "Semana 3 · Cowork",
+    label: "Cowork: casos de uso en la oficina",
+    title: "Cowork: casos de uso en la oficina",
+    subtitle: "Tareas reales que puedes delegar hoy.",
+    body: coworkCasos,
+    videoIds: ["aR66YkFI94o"],
+  },
+  {
+    slug: "cowork-seguridad",
+    group: "Semana 3 · Cowork",
+    label: "Cowork: permisos y seguridad",
+    title: "Cowork: permisos, seguridad y buenas prácticas",
+    subtitle: "Hace cambios reales: el criterio importa tanto como la tarea.",
+    body: coworkSeguridad,
+    videoIds: ["OlbJmceOf44"],
+  },
+  {
     slug: "nivel-5-skills",
-    group: "Semana 3 · Skills y conectores",
-    label: "Nivel 5 — Skills",
-    title: "Nivel 5 — Skills",
-    subtitle: "Experiencia empaquetada que Claude aplica solo cuando hace falta.",
-    body: nivel5,
+    group: "Semana 4 · Llevarlo más lejos",
+    label: "Skills",
+    title: "Skills",
+    subtitle: "Lo útil es automático; crear las tuyas, opcional.",
+    body: skills,
     videoIds: [],
   },
   {
     slug: "nivel-6-conectores",
-    group: "Semana 3 · Skills y conectores",
-    label: "Nivel 6 — Conectores (MCP)",
-    title: "Nivel 6 — Conectores (MCP)",
-    subtitle: "Conecta Claude con tus herramientas reales.",
-    body: nivel6,
+    group: "Semana 4 · Llevarlo más lejos",
+    label: "Conectores (MCP)",
+    title: "Conectores (MCP)",
+    subtitle: "Los comunes son de un clic; sin API keys.",
+    body: conectores,
     videoIds: [],
   },
   {
-    slug: "nivel-7-cowork",
-    group: "Semana 4 · Cowork",
-    label: "Nivel 7 — Cowork",
-    title: "Nivel 7 — Cowork (el salto agéntico)",
-    subtitle: "En el chat Claude responde; en Cowork, Claude hace.",
-    body: nivel7,
-    videoIds: ["8vwM96f4b5Q"],
-  },
-  {
-    slug: "nivel-8-siguiente",
-    group: "Semana 4 · Cowork",
-    label: "Nivel 8 — El siguiente nivel",
-    title: "Nivel 8 (opcional) — El siguiente nivel",
-    subtitle: "Claude Code y crear tus propias Skills y conectores.",
-    body: nivel8,
-    videoIds: ["73eFWU-edO4"],
+    slug: "claude-code",
+    group: "Semana 4 · Llevarlo más lejos",
+    label: "Claude Code: el siguiente nivel",
+    title: "Claude Code: el siguiente nivel",
+    subtitle: "La misma potencia que Cowork, pero en la terminal.",
+    body: claudeCode,
+    videoIds: ["1oseAPOrB3g"],
   },
   {
     slug: "recursos",
@@ -172,8 +193,8 @@ export function getChapterIndex(slug: string | undefined): number {
 export const groupOrder: Group[] = [
   "Comienza aquí",
   "Semana 1 · Fundamentos",
-  "Semana 2 · Proyectos y capacidades",
-  "Semana 3 · Skills y conectores",
-  "Semana 4 · Cowork",
+  "Semana 2 · Proyectos y entregables",
+  "Semana 3 · Cowork",
+  "Semana 4 · Llevarlo más lejos",
   "Ayudas y recursos",
 ];
