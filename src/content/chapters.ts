@@ -14,11 +14,19 @@ import recursos from "./chapters/recursos.md?raw";
 import errores from "./chapters/errores.md?raw";
 import paraLlevar from "./chapters/para-llevar.md?raw";
 
+export type Group =
+  | "Comienza aquí"
+  | "Semana 1 · Fundamentos"
+  | "Semana 2 · Proyectos y capacidades"
+  | "Semana 3 · Skills y conectores"
+  | "Semana 4 · Cowork"
+  | "Ayudas y recursos";
+
 export interface Chapter {
   /** stable id / route slug */
   slug: string;
-  /** sidebar group: the "niveles" form the learning path */
-  group: "Empezar" | "La ruta por niveles" | "Cerrar";
+  /** sidebar group: opening, then one group per week, then helps */
+  group: Group;
   /** short label for the sidebar */
   label: string;
   /** full chapter title shown at the top of the page */
@@ -34,7 +42,7 @@ export interface Chapter {
 export const chapters: Chapter[] = [
   {
     slug: "mentalidad",
-    group: "Empezar",
+    group: "Comienza aquí",
     label: "El cambio de mentalidad",
     title: "El cambio de mentalidad",
     subtitle: "Lo más importante: deja de preguntar, empieza a delegar.",
@@ -42,8 +50,17 @@ export const chapters: Chapter[] = [
     videoIds: ["eNcWAoj_sRI"],
   },
   {
+    slug: "plan-4-semanas",
+    group: "Comienza aquí",
+    label: "Plan de 4 semanas",
+    title: "Plan de 4 semanas (sin apuro)",
+    subtitle: "La hoja de ruta: ~30–45 min, 3 veces por semana.",
+    body: plan,
+    videoIds: [],
+  },
+  {
     slug: "nivel-1-prompts",
-    group: "La ruta por niveles",
+    group: "Semana 1 · Fundamentos",
     label: "Nivel 1 — Prompts que rinden",
     title: "Nivel 1 — Prompts que rinden",
     subtitle: "Los 5 ingredientes de un prompt profesional.",
@@ -52,7 +69,7 @@ export const chapters: Chapter[] = [
   },
   {
     slug: "nivel-2-personalizar",
-    group: "La ruta por niveles",
+    group: "Semana 1 · Fundamentos",
     label: "Nivel 2 — Personalizar Claude",
     title: "Nivel 2 — Personalizar Claude",
     subtitle: "Preferencias y estilos: configúralo una vez.",
@@ -61,7 +78,7 @@ export const chapters: Chapter[] = [
   },
   {
     slug: "nivel-3-proyectos",
-    group: "La ruta por niveles",
+    group: "Semana 2 · Proyectos y capacidades",
     label: "Nivel 3 — Proyectos",
     title: "Nivel 3 — Proyectos (Projects)",
     subtitle: "Contexto persistente: cárgalo una vez, úsalo semanas.",
@@ -70,7 +87,7 @@ export const chapters: Chapter[] = [
   },
   {
     slug: "nivel-4-capacidades",
-    group: "La ruta por niveles",
+    group: "Semana 2 · Proyectos y capacidades",
     label: "Nivel 4 — Capacidades de trabajo",
     title: "Nivel 4 — Las capacidades de trabajo (dentro del chat)",
     subtitle: "Archivos reales, análisis de datos, artefactos.",
@@ -79,7 +96,7 @@ export const chapters: Chapter[] = [
   },
   {
     slug: "nivel-5-skills",
-    group: "La ruta por niveles",
+    group: "Semana 3 · Skills y conectores",
     label: "Nivel 5 — Skills",
     title: "Nivel 5 — Skills",
     subtitle: "Experiencia empaquetada que Claude aplica solo cuando hace falta.",
@@ -88,7 +105,7 @@ export const chapters: Chapter[] = [
   },
   {
     slug: "nivel-6-conectores",
-    group: "La ruta por niveles",
+    group: "Semana 3 · Skills y conectores",
     label: "Nivel 6 — Conectores (MCP)",
     title: "Nivel 6 — Conectores (MCP)",
     subtitle: "Conecta Claude con tus herramientas reales.",
@@ -97,7 +114,7 @@ export const chapters: Chapter[] = [
   },
   {
     slug: "nivel-7-cowork",
-    group: "La ruta por niveles",
+    group: "Semana 4 · Cowork",
     label: "Nivel 7 — Cowork",
     title: "Nivel 7 — Cowork (el salto agéntico)",
     subtitle: "En el chat Claude responde; en Cowork, Claude hace.",
@@ -106,7 +123,7 @@ export const chapters: Chapter[] = [
   },
   {
     slug: "nivel-8-siguiente",
-    group: "La ruta por niveles",
+    group: "Semana 4 · Cowork",
     label: "Nivel 8 — El siguiente nivel",
     title: "Nivel 8 (opcional) — El siguiente nivel",
     subtitle: "Claude Code y crear tus propias Skills y conectores.",
@@ -114,17 +131,8 @@ export const chapters: Chapter[] = [
     videoIds: ["73eFWU-edO4"],
   },
   {
-    slug: "plan-4-semanas",
-    group: "Cerrar",
-    label: "Plan de 4 semanas",
-    title: "Plan de 4 semanas (sin apuro)",
-    subtitle: "Una rutina realista de ~30–45 min, 3 veces por semana.",
-    body: plan,
-    videoIds: [],
-  },
-  {
     slug: "recursos",
-    group: "Cerrar",
+    group: "Ayudas y recursos",
     label: "Recursos rápidos",
     title: "Recursos rápidos (resumen)",
     subtitle: "Lo oficial y gratis, y lo bueno en español.",
@@ -133,7 +141,7 @@ export const chapters: Chapter[] = [
   },
   {
     slug: "errores",
-    group: "Cerrar",
+    group: "Ayudas y recursos",
     label: "Errores comunes",
     title: "Errores comunes (y cómo evitarlos)",
     subtitle: "Los tropiezos típicos al empezar.",
@@ -142,7 +150,7 @@ export const chapters: Chapter[] = [
   },
   {
     slug: "para-llevar",
-    group: "Cerrar",
+    group: "Ayudas y recursos",
     label: "La idea para llevarse",
     title: "La idea para llevarse",
     subtitle: "Domina un flujo de punta a punta.",
@@ -161,8 +169,11 @@ export function getChapterIndex(slug: string | undefined): number {
   return chapters.findIndex((c) => c.slug === slug);
 }
 
-export const groupOrder: Chapter["group"][] = [
-  "Empezar",
-  "La ruta por niveles",
-  "Cerrar",
+export const groupOrder: Group[] = [
+  "Comienza aquí",
+  "Semana 1 · Fundamentos",
+  "Semana 2 · Proyectos y capacidades",
+  "Semana 3 · Skills y conectores",
+  "Semana 4 · Cowork",
+  "Ayudas y recursos",
 ];
